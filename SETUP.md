@@ -47,7 +47,7 @@ By default it has python 3.11 installed.
 
 ## Setup whisper on Debien Bookworm
 
-```
+```bash
 mkdir ~/tommygotchi && cd ~/tommygotchi
 
 sudo apt update \
@@ -99,7 +99,7 @@ Description=tommygotchi service
 [Service]
 User=$USER
 WorkingDirectory=$HOME/tommygotchi/app
-ExecStart=$HOME/tommygotchi/app/.venv/bin/python3 -m src/client/main
+ExecStart=$HOME/tommygotchi/app/.venv/bin/python3 src/client/main.py
 Restart=always
 RestartSec=15
 
@@ -127,33 +127,15 @@ sudo apt-get install -y alsa-tools alsa-utils
 - Microphone (USB ReSpeaker Mic Array v2.0)
 - Speaker (JBL Jack 3.5mm GO 2)
 
-# Remote voice to text server
+# Remote voice to text (whisper) server using docker
 
-Litens on port **4242**
+Listens on port **4242**
+
+*First time it takes a while to boot correctly*
 
 ```bash
-cat <<EOF > tommygotchi-server.service
-[Unit]
-Description=tommygotchi server service
-
-[Service]
-User=$USER
-WorkingDirectory=$HOME/tommygotchi/app
-ExecStart=$HOME/tommygotchi/app/.venv/bin/python3 -m src/server/main
-Restart=always
-RestartSec=15
-
-[Install]
-WantedBy=multi-user.target
-EOF
-
-sudo chown root:root tommygotchi-server.service
-sudo chmod 755 tommygotchi-server.service
-sudo mv tommygotchi-server.service /etc/systemd/system/
-sudo systemctl daemon-reload
-sudo systemctl start tommygotchi-server.service
-sudo systemctl status tommygotchi-server.service
-sudo systemctl enable tommygotchi-server.service
-
-journalctl -u tommygotchi-server.service -f
+docker build -t tommygotchi-server .
+docker run -d --name tommygotchi-server --restart=always -p 4242:4242 tommygotchi-server:latest
 ```
+
+
