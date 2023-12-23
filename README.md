@@ -1,5 +1,7 @@
 # Notes
 
+# Install Whisper on MacOS
+
 ```bash
 sudo port install portaudio
 sudo port install pkgconfig
@@ -8,7 +10,7 @@ pip3 install git+https://github.com/openai/whisper.git
 pip3 install -r requirements.txt
 ```
 
-# Piper
+# Piper Installation on MacOS
 
 Source: https://github.com/rhasspy/piper-phonemize/issues/14#issuecomment-1837289540
 
@@ -40,7 +42,7 @@ echo 'Welcome to the world of speech synthesis!' | piper --model en_US-lessac-me
 afplay welcome.wav
 ```
 
-# Generate wav
+# Generate wav using Piper
 
 ```bash
 echo 'Yes !' | \
@@ -49,7 +51,7 @@ echo 'Ok !' | \
   piper --model ./piper-voices/en_US-amy-medium.onnx --output_file ok.wav
 ```
 
-# llama GPT
+# Llama GPT Installation
 
 https://github.com/getumbrel/llama-gpt
 
@@ -76,6 +78,6 @@ cd llama-gpt
 python3 main.py
 ```
 
-# Sounds 
+# Sounds
 
 - https://freesound.org/people/GameAudio/sounds/220175/

@@ -3,7 +3,7 @@ from Mouth import Mouth
 from Brain import Brain
 
 def activeListenHandler(mic, brain, mouth, skip_intro=False):
-    input = mic.activeListen(skip_intro)
+    input = mic.activeListen(skip_intro=skip_intro)
 
     if input:
         answer = brain.post(input)
@@ -31,7 +31,6 @@ def handler():
         print("You said: " + transcribed)
         
         activeListenHandler(mic, brain, mouth)
-
         mouth.play("audio/220175__gameaudio__pop-click.wav")
 
 if __name__ == "__main__":
