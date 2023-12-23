@@ -6,12 +6,17 @@ import audioop
 import pyaudio
 import whisper
 import re
+import os
+import requests
+import json
 
 class Microphone:
-    def __init__(self, speaker, model="medium"):
+    def __init__(self, speaker, model="medium", remote_whisper=False, remote_whisper_url=None):
         self.speaker = speaker
         self._audio = pyaudio.PyAudio()
         self.model = whisper.load_model(model)
+        self.remote_whisper = remote_whisper
+        self.remote_whisper_url = remote_whisper_url
 
     def __del__(self):
         self._audio.terminate()
@@ -50,8 +55,17 @@ class Microphone:
         return THRESHOLD
     
     def transcribe(self, path):
-        result = self.model.transcribe(path)
-        return result["text"]
+        if self.remote_whisper == False:
+            result = self.model.transcribe(path)
+            return result["text"]
+        else:
+            payload = {}
+            files=[
+                ('file',('from_client.wav',open(path,'rb'),'audio/wav'))
+            ]
+            headers = {}
+            response = requests.request("POST", self.remote_whisper_url, headers=headers, data=payload, files=files)
+            return json.loads(response.text)["result"]
     
     def passiveListen(self, PERSONA):
         print("Im listening carefully")
@@ -132,7 +146,9 @@ class Microphone:
             THRESHOLD = self.fetchThreshold()
 
         if skip_intro == False:
-            self.speaker.play('audio/yes.wav')
+            self.speaker.play(os.path.join(os.path.dirname(__file__), '..', 'audio', 'yes.wav'))
+        else:
+            self.speaker.play(os.path.join(os.path.dirname(__file__), '..', 'audio', '611503__harrisonlace__perc_checkout.wav'))
 
         stream = self._audio.open(format=pyaudio.paInt16,
                                   channels=1,
@@ -154,7 +170,7 @@ class Microphone:
             if average < THRESHOLD * 0.8:
                 break
 
-        self.speaker.play('audio/ok.wav')
+        self.speaker.play(os.path.join(os.path.dirname(__file__), '..', 'audio', 'ok.wav'))
 
         stream.stop_stream()
         stream.close()

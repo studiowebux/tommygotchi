@@ -35,7 +35,7 @@ class Brain:
     def updateContext(self, answer):
         self.context["messages"].append({'role': "assistant", 'content': answer})
         f = open("brain.json", "w")
-        f.write(json.dumps(self.context, indent=4))
+        json.dump(self.context, f, indent=4)
         f.close()
     
     def post(self, prompt):

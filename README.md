@@ -74,10 +74,38 @@ cd llama-gpt
 
 # Start
 
+On MacOS:
+
 ```bash
-python3 main.py
+export DYLD_LIBRARY_PATH="$PWD/piper-phonemize/install/lib/"
+```
+
+```bash
+python3 src/client/main.py
+```
+
+# Server to run whisper on remote machine
+
+```bash
+python3 src/server/main.py
+```
+
+```text
+POST http://localhost:4242/api
+form-data: key=file
+```
+
+Returns `application/json`
+
+```json
+{
+  "status": "OK", // "ERR"
+  "result": "transcribed text" // "Failed to transcribe..."
+}
 ```
 
 # Sounds
 
 - https://freesound.org/people/GameAudio/sounds/220175/
+- https://freesound.org/people/harrisonlace/sounds/611503/
+
