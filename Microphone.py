@@ -8,10 +8,10 @@ import whisper
 import re
 
 class Microphone:
-    def __init__(self, speaker):
+    def __init__(self, speaker, model="medium"):
         self.speaker = speaker
         self._audio = pyaudio.PyAudio()
-        self.model = whisper.load_model("medium")
+        self.model = whisper.load_model(model)
 
     def __del__(self):
         self._audio.terminate()

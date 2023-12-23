@@ -10,9 +10,12 @@ from os import remove
 class Mouth:
         model = None
         voice = None
+        
+        command = None
 
-        def __init__(self, model_set):
+        def __init__(self, model_set, command="afplay"):
             self.model_set = model_set
+            self.command = command
 
         def load(self):
             if '.onnx' in self.model_set:
@@ -27,7 +30,7 @@ class Mouth:
             self.play('talk_to_me.wav', True)
         
         def play(self, filename, temp=False):
-            cmd = ['afplay', str(filename)]
+            cmd = [self.command, str(filename)]
             print('Executing %s', ' '.join([pipes.quote(arg)
                                                         for arg in cmd]))
             with tempfile.TemporaryFile() as f:

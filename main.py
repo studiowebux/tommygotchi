@@ -17,7 +17,7 @@ def activeListenHandler(mic, brain, mouth, skip_intro=False):
 
 def handler():
     mouth = Mouth(model_set="./piper-voices/en_US-amy-medium.onnx")
-    mic = Microphone(speaker=mouth)
+    mic = Microphone(speaker=mouth, model="medium")
     brain = Brain()
 
     mouth.say("Hello, I'm listening.")
