@@ -127,6 +127,10 @@ sudo apt-get install -y alsa-tools alsa-utils
 - Microphone (USB ReSpeaker Mic Array v2.0)
 - Speaker (JBL Jack 3.5mm GO 2)
 
+**TODO**
+
+- Find a better way to avoid saving the audio file everywhere.
+
 # Remote voice to text (whisper) server using docker
 
 Listens on port **4242**
@@ -135,7 +139,7 @@ Listens on port **4242**
 
 ```bash
 docker build -t tommygotchi-server .
-docker run -d --name tommygotchi-server --restart=always -p 4242:4242 tommygotchi-server:latest
+docker run -d --name tommygotchi-server --cpus='2' --restart=always -p 4242:4242 tommygotchi-server:latest
 ```
 
 

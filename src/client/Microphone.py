@@ -30,7 +30,7 @@ class Microphone:
         THRESHOLD_MULTIPLIER = 1.8
         RATE = 16000
         CHUNK = 1024
-        THRESHOLD_TIME = 1
+        THRESHOLD_TIME = 3
 
         stream = self._audio.open(format=pyaudio.paInt16,
                                   channels=1,
