@@ -1,0 +1,9 @@
+piper-phonemize
+llama-gpt/
+
+__pycache__/
+
+.DS_Store
+
+brain.json
+talk_to_me.wav

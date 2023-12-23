@@ -1,0 +1,21 @@
+{
+  "model": {
+    "id": "./models/llama-2-7b-chat.bin",
+    "name": "Llama 2 7B",
+    "maxLength": 12000,
+    "tokenLimit": 4000
+  },
+  "messages": [
+    {
+      "role": "user",
+      "content": "PLACEHOLDER"
+    },
+    {
+      "role": "assistant",
+      "content": "PLACEHOLDER"
+    }
+  ],
+  "key": "",
+  "prompt": "You are a helpful and friendly AI assistant. Respond very concisely.",
+  "temperature": 1
+}
