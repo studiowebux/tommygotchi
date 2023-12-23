@@ -86,7 +86,7 @@ This is only a POC, nothing has been done to configure the project.
 ## Start Project
 
 ```bash
-python3 main.py
+python3 /src/client/main.py
 ```
 
 ## Create Linux Service
@@ -99,7 +99,7 @@ Description=tommygotchi service
 [Service]
 User=$USER
 WorkingDirectory=$HOME/tommygotchi/app
-ExecStart=$HOME/tommygotchi/app/.venv/bin/python3 -m main
+ExecStart=$HOME/tommygotchi/app/.venv/bin/python3 -m src/client/main
 Restart=always
 RestartSec=15
 
@@ -127,3 +127,33 @@ sudo apt-get install -y alsa-tools alsa-utils
 - Microphone (USB ReSpeaker Mic Array v2.0)
 - Speaker (JBL Jack 3.5mm GO 2)
 
+# Remote voice to text server
+
+Litens on port **4242**
+
+```bash
+cat <<EOF > tommygotchi-server.service
+[Unit]
+Description=tommygotchi server service
+
+[Service]
+User=$USER
+WorkingDirectory=$HOME/tommygotchi/app
+ExecStart=$HOME/tommygotchi/app/.venv/bin/python3 -m src/server/main
+Restart=always
+RestartSec=15
+
+[Install]
+WantedBy=multi-user.target
+EOF
+
+sudo chown root:root tommygotchi-server.service
+sudo chmod 755 tommygotchi-server.service
+sudo mv tommygotchi-server.service /etc/systemd/system/
+sudo systemctl daemon-reload
+sudo systemctl start tommygotchi-server.service
+sudo systemctl status tommygotchi-server.service
+sudo systemctl enable tommygotchi-server.service
+
+journalctl -u tommygotchi-server.service -f
+```
