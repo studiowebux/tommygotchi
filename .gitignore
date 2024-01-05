@@ -1,5 +1,6 @@
 piper-phonemize
 llama-gpt/
+llama.cpp
 
 __pycache__/
 
@@ -9,3 +10,4 @@ brain.json
 talk_to_me.wav
 
 uploads/
+models/

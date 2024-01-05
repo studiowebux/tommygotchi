@@ -1,0 +1,7 @@
+llama-2-13b-chat.Q4_0.gguf
+*.gguf
+
+Miniforge3-MacOSX-arm64.sh
+
+data/
+.venv/

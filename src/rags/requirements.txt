@@ -1,0 +1,5 @@
+llama_index
+transformers
+llama-cpp-python
+openai
+torch

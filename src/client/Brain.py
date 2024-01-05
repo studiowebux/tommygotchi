@@ -43,7 +43,7 @@ class Brain:
 
     def post(self, prompt):
         self.context["messages"].append({"role": "user", "content": prompt})
-        r = requests.post(url=self.URL, json=self.context)
+        r = requests.post(url=self.URL, json=self.context, timeout=600)
         response = r.text
         print("Response from LlamaGPT: %s" % response)
         return response

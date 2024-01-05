@@ -139,7 +139,7 @@ Listens on port **4242**
 
 ```bash
 docker build -t tommygotchi-server .
-docker run -d --name tommygotchi-server --cpus='2' --restart=always -p 4242:4242 tommygotchi-server:latest
+docker run -d --name tommygotchi-server --cpus='8' --restart=always -p 4242:4242 tommygotchi-server:latest
 ```
 
 
